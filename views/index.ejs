@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>cmap</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?key"></script>
+</head>
+<body>
+  <div id="navbar">hahahaha</div>
+  <div id="info-box">
+    <div id="info-title">현재날짜</div>
+    <div id="info-content">2020.11.03</div>
+  </div>
+
+  <div id="map" style="width:100%;height:100vh;"></div>
+
+
+  <script src="../data/data.js"></script>
+  <script>
+    var mapOptions = {
+        center: new naver.maps.LatLng(37.3595704, 127.105399),
+        zoom: 10
+    };
+
+    var map = new naver.maps.Map('map', mapOptions);
+
+
+    var markerList = []
+    var infoWindowList = []
+
+    for(var i = 0; i < data.length; i++) {
+        var latlng = new naver.maps.LatLng(data[i].lat, data[i].lng)
+
+
+        var content = `<div class="info-window-wrap">
+                <div class="info-window-title">${data[i].title}</div>
+                <div class="info-window-content">${data[i].content}</div>
+                <div class="info-window-date">${data[i].date}</div>
+            </div>`
+
+        var marker = new naver.maps.Marker({
+            map: map,
+            position: latlng,
+            icon: {
+                content: '<div class="marker"></div>',
+                anchor: new naver.maps.Point(10, 10)
+            }
+        })
+
+        var infoWindow = new naver.maps.InfoWindow({
+            content: content,
+            backgroundColor: "#00ff0000",
+            borderColor: "#00ff0000",
+            anchorSize: new naver.maps.Size(0, 0),
+        })
+
+
+        markerList.push(marker);
+        infoWindowList.push(infoWindow)
+
+        console.log(markerList)
+    }
+
+
+    for(var i = 0; i < markerList.length; i++) {
+        naver.maps.Event.addListener(map, 'click', clickMap(i))
+        naver.maps.Event.addListener(markerList[i], "click", getClickHandler(i))
+    }
+
+    function clickMap(i) {
+        return function() {
+            var infoWindow = infoWindowList[i]
+            infoWindow.close();
+            console.log(infoWindow)
+        }
+    }
+
+    function getClickHandler(i) {
+        return function() {
+            var marker = markerList[i]
+            var infoWindow = infoWindowList[i]
+            // console.log(infoWindow)
+            if(infoWindow.getMap()) {
+                infoWindow.close();
+            } else {
+                infoWindow.open(map, marker)
+            }
+        }
+    }
+
+
+
+  </script>
+</body>
+</html>

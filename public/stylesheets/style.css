@@ -1,0 +1,66 @@
+body {
+    padding: 0px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    margin: 0px;
+}
+
+#navbar {
+    width:100%; 
+    height:50px; 
+    background: #262626; 
+    color: #fff; 
+    font-weight: bolder; 
+    font-size: 25px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+}
+
+#info-box {
+    position: absolute;
+    top:100px; 
+    z-index: 10000;
+    background: #fff;;
+    padding:15px;
+    left:20px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    text-align: center;
+}
+
+
+#info-title{
+    font-size: 15px;
+    font-weight: bold;
+}
+
+
+.marker {
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    background: green;
+    opacity: .5;
+    border-radius: 50%;
+}
+
+.info-window-wrap {
+    background: #fff;
+    padding: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.info-window-title {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.info-window-content {
+    font-size: 13px;
+    font-weight: normal;
+}
+
+.info-window-data {
+    font-size: 13px;
+    font-weight: normal;
+}
